@@ -11,10 +11,9 @@ import UIKit
 class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var input: UITextField!
     @IBOutlet weak var result: UILabel!
-    let romanFullDict: KeyValuePairs =
-        ["I" : 1, "IV" : 4, "V" : 5, "IX" : 9, "X" : 10, "XL" : 40, "L" : 50, "XC" : 90, "C" : 100, "CD" : 400 ,"D" : 500, "CM" : 900 ,"M" : 1000]
-    let romanDict: [Character : Int] =
-        ["I" : 1, "V" : 5, "X" : 10, "L" : 50, "C" : 100, "D" : 500, "M" : 1000]
+
+    
+    var romanNumeral : RomanNumeral = RomanNumeral()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +24,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @objc
     func keyboardWillShow(sender: NSNotification) {
-        self.view.frame.origin.y = -100 // Move view 150 points upward
+        self.view.frame.origin.y = -100 // Move view 100 points upward
     }
     
     @objc
@@ -34,59 +33,63 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func doCalculation(_ sender: Any) {
-        //var res = self.intToRoman(num: Int(self.input.text!)!)
-
-        var res = romanToInt(roman: self.input.text!)
-        self.result.text = String(res)
+        if let userInput = self.input.text {
+            var res = ""
+            if !userInput.isEmpty {
+                let inputStr = userInput.trimmingCharacters(in: .whitespaces)
+                if inputStr.contains("+"){
+                    let inputArr = inputStr.components(separatedBy:"+")
+                    if(inputArr.count != 2){
+                        self.showError(errorMsg: "Invalid Expression")
+                        return
+                    }
+                    let left = inputArr[0].trimmingCharacters(in: .whitespaces)
+                    let right = inputArr[1].trimmingCharacters(in: .whitespaces)
+                    var l = 0
+                    var r = 0
+                    if self.romanNumeral.isRoman(roman: left) {
+                        l = self.romanNumeral.romanToInt(roman: left)
+                    } else if left.isNumber, let leftNum = Int(left) {
+                        l = leftNum
+                    } else {
+                        self.showError(errorMsg: "Invalid Expression")
+                        return
+                    }
+                    if self.romanNumeral.isRoman(roman: right) {
+                        r = self.romanNumeral.romanToInt(roman: right)
+                    } else if right.isNumber, let rightNum = Int(right) {
+                        r = rightNum
+                    } else {
+                        self.showError(errorMsg: "Invalid Expression")
+                        return
+                    }
+                    res = String(self.romanNumeral.intToRoman(num: l + r))
+                    
+                } else if inputStr.isNumber, let inputNumber = Int(inputStr) {
+                    res = self.romanNumeral.intToRoman(num: inputNumber)
+                    
+                } else if self.romanNumeral.isRoman(roman: inputStr){
+                    let t = self.romanNumeral.romanToInt(roman: inputStr)
+                    if t < 0 {
+                        self.showError(errorMsg: "Invalid Roman Numeral")
+                        return
+                    } else {
+                        res = String(t)
+                    }
+                } else {
+                    self.showError(errorMsg: "Invalid Roman Numeral")
+                    return
+                }
+                self.result.text = res
+            }
+        }
     }
     @IBAction func clearResults(_ sender: Any) {
         self.result.text = "0"
         self.input.text = ""
     }
     
-    func intToRoman(num: Int)->String {
-        var number = num
-        var ret = ""
-        while number > 0 {
-            for (roman, intValue) in romanFullDict.reversed() {
-                let remainder = number - intValue
-                if remainder >= 0 {
-                    number = remainder
-                    ret += roman
-                    break
-                }
-            }
-        }
-        return ret
-    }
-    
-    func checkRoman(_ s: String) -> Bool {
-        return Dictionary(grouping: Array(s), by: {$0}).filter({$1.count>3}).count < 1
-    }
-    
-    func romanToInt(roman: String) -> Int {
-        if !checkRoman(roman) {
-            showError()
-            return 0
-        }
-        var ret = 0
-        let inputArr = Array(roman)
-
-        for index in 0..<inputArr.count {
-            guard let current = romanDict[inputArr[index]] else {
-                showError()
-                return 0
-            }
-            if index-1 >= 0, let previous = romanDict[inputArr[index-1]], current > previous{
-                ret -= 2*previous
-            }
-            ret += current
-            
-        }
-        return ret
-    }
-    
-    private func showError(){
+    private func showError(errorMsg: String){
         DispatchQueue.main.async {
             self.result.text = "Invalid Roman Nuermals"
         }
@@ -110,4 +113,5 @@ extension String  {
     var isNumber: Bool {
         return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
     }
+    
 }

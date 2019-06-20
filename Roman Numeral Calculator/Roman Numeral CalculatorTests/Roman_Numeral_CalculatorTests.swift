@@ -10,9 +10,9 @@ import XCTest
 @testable import Roman_Numeral_Calculator
 
 class Roman_Numeral_CalculatorTests: XCTestCase {
-
+    var romanNumeral : RomanNumeral!
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        romanNumeral = RomanNumeral()
     }
 
     override func tearDown() {
@@ -20,8 +20,12 @@ class Roman_Numeral_CalculatorTests: XCTestCase {
     }
 
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        XCTAssertEqual(self.romanNumeral.romanToInt(roman: "M"), 1000)
+        XCTAssertEqual(self.romanNumeral.intToRoman(num: 1981), "MCMLXXXI")
+        XCTAssertEqual(self.romanNumeral.intToRoman(num: 10), "X")
+        XCTAssertEqual(self.romanNumeral.intToRoman(num: 7), "VII")
+        XCTAssertEqual(self.romanNumeral.intToRoman(num: 99), "XCIX")
+        XCTAssertEqual(self.romanNumeral.intToRoman(num: 700), "DCC")
     }
 
     func testPerformanceExample() {

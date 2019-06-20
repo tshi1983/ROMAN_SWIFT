@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B90D5BD922BB170200FECF7A /* RomanNumeral.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90D5BD822BB170200FECF7A /* RomanNumeral.swift */; };
 		B9372B2A22BA437300DF9448 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9372B2922BA437300DF9448 /* AppDelegate.swift */; };
 		B9372B2C22BA437300DF9448 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9372B2B22BA437300DF9448 /* ViewController.swift */; };
 		B9372B2F22BA437300DF9448 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9372B2D22BA437300DF9448 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B90D5BD822BB170200FECF7A /* RomanNumeral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanNumeral.swift; sourceTree = "<group>"; };
 		B9372B2622BA437300DF9448 /* Roman Numeral Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Roman Numeral Calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9372B2922BA437300DF9448 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9372B2B22BA437300DF9448 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				B9372B3522BA437400DF9448 /* LaunchScreen.storyboard */,
 				B9372B3822BA437400DF9448 /* Info.plist */,
 				B9372B3022BA437300DF9448 /* Roman_Numeral_Calculator.xcdatamodeld */,
+				B90D5BD822BB170200FECF7A /* RomanNumeral.swift */,
 			);
 			path = "Roman Numeral Calculator";
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			files = (
 				B9372B3222BA437300DF9448 /* Roman_Numeral_Calculator.xcdatamodeld in Sources */,
 				B9372B2C22BA437300DF9448 /* ViewController.swift in Sources */,
+				B90D5BD922BB170200FECF7A /* RomanNumeral.swift in Sources */,
 				B9372B2A22BA437300DF9448 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,8 +440,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y2D62367Q8;
+				DEVELOPMENT_TEAM = 8QL6MKP97G;
 				INFOPLIST_FILE = "Roman Numeral Calculator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -445,6 +450,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Wise-Digital.Roman-Numeral-Calculator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -454,8 +460,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y2D62367Q8;
+				DEVELOPMENT_TEAM = 8QL6MKP97G;
 				INFOPLIST_FILE = "Roman Numeral Calculator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -463,6 +470,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Wise-Digital.Roman-Numeral-Calculator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
